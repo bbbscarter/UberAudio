@@ -75,6 +75,12 @@ There are various advantages to organising things in banks:
 of related audio into the same bank.
 * And audio clip can be reused multiple times with different settings.
 * You can mount or unmount audio banks on demand.
+* Moreover, because of the flexible trigger system UberAudio uses,
+when you mount a new bank any new events that share the same event
+names as existing events are automatically grouped. This means you can
+do memory saving tricks like keeping a default, fallback audio bank in
+memory all the time and load up audio variations on demand when
+needed.  
 
 ### Audio Event Triggers
 
