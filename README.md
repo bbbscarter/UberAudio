@@ -199,7 +199,7 @@ From left to right, we've got:
 * Usage examples can be seen in the Examples folder.
 
 ## Notes
-* Require Unity 5.1
+* Requires Unity 5.1
 * Pull requests welcome!
 
  * * * *
