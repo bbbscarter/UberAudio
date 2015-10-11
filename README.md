@@ -1,5 +1,5 @@
-# UberLogger
-UberLogger is a free, open-source extension of Unity's audio
+# UberAudio
+UberAudio is a free, open-source extension of Unity's audio
 system. It organises all your audio into banks, rather than scenes or
 prefabs, and audio is triggered through a flexible, loosely coupled
 interface.
