@@ -1,13 +1,11 @@
 # UberLogger
-UberLogger is a free, opensource extension of Unity's
-audio system. It organises all your audio into banks, rather than
-scenes, and audio is triggered through a flexible, loosely coupled
+UberLogger is a free, open-source extension of Unity's audio
+system. It organises all your audio into banks, rather than scenes or
+prefabs, and audio is triggered through a flexible, loosely coupled
 interface.
 
 Although rewritten for Unity, this is the same system we used on
 Dungeon Keeper and Fable.
-
-
 
 
 ## Core Features
@@ -76,15 +74,15 @@ of related audio into the same bank.
 * And audio clip can be reused multiple times with different settings.
 * You can mount or unmount audio banks on demand.
 * Moreover, because of the flexible trigger system UberAudio uses,
-when you mount a new bank any new events that share the same event
-names as existing events are automatically grouped. This means you can
-do memory saving tricks like keeping a default, fallback audio bank in
-memory all the time and load up audio variations on demand when
-needed.  
+when you mount a new bank any new audio events that share the same
+triggers as existing events are automatically grouped. This means you
+can keep an audio bank in memory with a single version of a sound, and
+then load/unload banks containing variations on demand - a handy
+memory saving trick.
 
 ### Audio Event Triggers
 
-To trigger an audio event in a bank, you simply call
+To trigger an audio event in a bank you simply call
 'AudioManager.Instance.Play()' with the name of the event you want to
 trigger. If such a trigger isn't found, nothing is played.
 
@@ -113,9 +111,9 @@ find anything; it then strips off the first specialisation on the left
 ('Goblin' in this case), and tries again, this time finding
 Footstep. Footstep is played, giving you a default sound.
 
-This system works for any number of specialisations, working
-from right to left. Thus 'Wolf:Gravel:Footstep' might be used if you
-have different sounds for ground materials.
+This system works for any number of specialisations, working from left
+to right. Thus things 'Wolf:Gravel:Footstep' might be used if you have
+different sounds for ground materials.
 
 This is a very handy workflow. It means coders can programmatically
 fire off very specific events to the audio system, and audio designers
