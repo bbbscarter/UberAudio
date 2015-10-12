@@ -11,6 +11,10 @@ namespace UberAudio
 
         void Start()
         {
+            if(AudioManager.Instance==null)
+            {
+                return;
+            }
             foreach (var bankName in BanksToMount)
             {
                 AudioManager.Instance.LoadEventBank(bankName);
@@ -19,6 +23,11 @@ namespace UberAudio
 
         void OnDestroy()
         {
+            if(AudioManager.Instance==null)
+            {
+                return;
+            }
+
             foreach (var bankName in BanksToMount)
             {
                 if(AudioManager.Instance)
