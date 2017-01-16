@@ -255,7 +255,9 @@ namespace UberAudio
                 foldedOut = FoldedOut[audioEvent.GetHashCode()];
             }
 
-            EditorGUIUtility.LookLikeControls(20, 1);
+            EditorGUIUtility.labelWidth = 20;
+            EditorGUIUtility.fieldWidth = 1;
+
             foldedOut = EditorGUILayout.Foldout(foldedOut, "");
             FoldedOut[audioEvent.GetHashCode()] = foldedOut;
 
@@ -275,7 +277,8 @@ namespace UberAudio
             }
 
             //Event name
-            EditorGUIUtility.LookLikeControls(20, 100);
+            EditorGUIUtility.labelWidth = 20;
+            EditorGUIUtility.fieldWidth = 100;
             GUI.SetNextControlName("TextField");
             audioEvent.EventName = EditorGUILayout.TextField(audioEvent.EventName);
 
@@ -286,11 +289,13 @@ namespace UberAudio
             }
             
             //The audio clip
-            EditorGUIUtility.LookLikeControls(30, 100);
+            EditorGUIUtility.labelWidth = 30;
+            EditorGUIUtility.fieldWidth = 100;
             audioEvent.AudioClip = (AudioClip) EditorGUILayout.ObjectField("", audioEvent.AudioClip, typeof(AudioClip), false, GUILayout.MinWidth(60));
 
             //The random weight control
-            EditorGUIUtility.LookLikeControls(25, 20);
+            EditorGUIUtility.labelWidth = 20;
+            EditorGUIUtility.fieldWidth = 20;
             audioEvent.RandomWeight = EditorGUILayout.FloatField("Wgt", audioEvent.RandomWeight, GUILayout.MaxWidth (60));
 
             //Show the loop/lifetime mask
@@ -324,7 +329,8 @@ namespace UberAudio
                 var source = EventToSourceMap[audioEvent];
                 if(source!=null)
                 {
-                    EditorGUIUtility.LookLikeControls();
+                    EditorGUIUtility.labelWidth = 0;
+                    EditorGUIUtility.fieldWidth = 0;
                     EditorGUI.BeginChangeCheck();
                     DrawProxy(audioEvent);
                     if(EditorGUI.EndChangeCheck())
@@ -399,7 +405,7 @@ namespace UberAudio
                             EditorGUI.DrawRect(dragArea.Area, Color.white);
                         }
                     }
-                    currentEvent.Use();
+                    // currentEvent.Use();
                     break;
                 case EventType.DragPerform:
                     if(dragData!=null && dragArea!=null)
