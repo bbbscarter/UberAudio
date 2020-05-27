@@ -361,7 +361,7 @@ namespace UberAudio
 
             switch(currentEvent.type)
             {
-                case EventType.mouseDown:
+                case EventType.MouseDown:
                     if(dragArea!=null)
                     {
                         DragAndDrop.PrepareStartDrag();
@@ -374,7 +374,7 @@ namespace UberAudio
                     currentEvent.Use();
                     break;
                     
-                case EventType.mouseDrag:
+                case EventType.MouseDrag:
                     if(dragData!=null)
                     {
                         FoldedOut.Clear();
@@ -383,7 +383,7 @@ namespace UberAudio
                     DragAndDrop.visualMode = DragAndDropVisualMode.Move;
                     currentEvent.Use();
                     break;
-                case EventType.dragUpdated:
+                case EventType.DragUpdated:
                     if(dragData!=null && dragArea!=null)
                     {
                         if(dragArea.Index!=dragData.Index)
@@ -397,7 +397,7 @@ namespace UberAudio
                     }
                     currentEvent.Use();
                     break;
-                case EventType.repaint:
+                case EventType.Repaint:
                     if(dragData!=null && dragArea!=null)
                     {
                         if(DragAndDrop.visualMode==DragAndDropVisualMode.Move)
