@@ -248,19 +248,6 @@ namespace UberAudio
                 DropAreas.Add(new DropArea(audioEventIndex, dropArea));
             }
 
-            //Details foldout
-            bool foldedOut = false;
-            if(FoldedOut.ContainsKey(audioEvent.GetHashCode()))
-            {
-                foldedOut = FoldedOut[audioEvent.GetHashCode()];
-            }
-
-            EditorGUIUtility.labelWidth = 20;
-            EditorGUIUtility.fieldWidth = 1;
-
-            foldedOut = EditorGUILayout.Foldout(foldedOut, "");
-            FoldedOut[audioEvent.GetHashCode()] = foldedOut;
-
             //Show all the summary details and buttons
             EditorGUI.BeginChangeCheck();
 
@@ -288,6 +275,18 @@ namespace UberAudio
 
             //Show the loop/lifetime mask
             DrawAudioEventOptionsMask(audioEvent);
+
+            //Details foldout
+            bool foldedOut = false;
+            if(FoldedOut.ContainsKey(audioEvent.GetHashCode()))
+            {
+                foldedOut = FoldedOut[audioEvent.GetHashCode()];
+            }
+            if (GUILayout.Button(new GUIContent("A", "Audio source settings"), GUILayout.MaxWidth(PlayButtonWidth)))
+            {
+                foldedOut = !foldedOut;
+            }
+            FoldedOut[audioEvent.GetHashCode()] = foldedOut;
 
             //Playback controls
             if (GUILayout.Button(new GUIContent("T", "Play this audio event"), GUILayout.MaxWidth(PlayButtonWidth)))
