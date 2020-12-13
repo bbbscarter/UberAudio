@@ -44,14 +44,15 @@ namespace UberAudio
         //Set up our singleton.
         public void Awake()
         {
-            if(Instance!=null)
+            if (Instance != null)
             {
                 Destroy(gameObject);
             }
             else
             {
                 Instance = this;
-                UnityEngine.Object.DontDestroyOnLoad(gameObject);
+                name = "uberaudio_singleton";
+                DontDestroyOnLoad(gameObject);
             }
         }
     
