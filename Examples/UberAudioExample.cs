@@ -13,7 +13,7 @@ public class UberAudioExample : MonoBehaviour
 	}
 
 	List<SoundGO> ActiveObjects = new List<SoundGO>();
-	public GUIText InstructionText;
+	// public GUIText InstructionText;
 	public Transform StartPos;
 	public Transform EndPos;
 	public GameObject SoundObjectPrefab;
@@ -23,13 +23,13 @@ public class UberAudioExample : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		InstructionText.text =
-			@"1 Play LaserShot
-2 Play UnknownShot
-3 Play Immediate Stop Loop
-4 Play Release Loop
-5 Play static Shot
-0 Kill all";
+// 		InstructionText.text =
+// 			@"1 Play LaserShot
+// 2 Play UnknownShot
+// 3 Play Immediate Stop Loop
+// 4 Play Release Loop
+// 5 Play static Shot
+// 0 Kill all";
 	}
 	
 	// Update is called once per frame

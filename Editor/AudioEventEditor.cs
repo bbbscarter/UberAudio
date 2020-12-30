@@ -234,47 +234,22 @@ namespace UberAudio
                 EditorGUILayout.Space();
             }
 
-            bool topLevelEvent = IsEventIndexTopOfGroup(audioEventIndex);
-
             //Draw all these controls on a single line
             EditorGUILayout.BeginHorizontal();
 
             //Drag handle
             Rect dropArea = GUILayoutUtility.GetRect(40, 20);
             dropArea.width = 30;
+
+            bool topLevelEvent = IsEventIndexTopOfGroup(audioEventIndex);
             if(topLevelEvent)
             {
                 GUI.Box(dropArea, "");
                 DropAreas.Add(new DropArea(audioEventIndex, dropArea));
             }
 
-            //Details foldout
-            bool foldedOut = false;
-            if(FoldedOut.ContainsKey(audioEvent.GetHashCode()))
-            {
-                foldedOut = FoldedOut[audioEvent.GetHashCode()];
-            }
-
-            EditorGUIUtility.labelWidth = 20;
-            EditorGUIUtility.fieldWidth = 1;
-
-            foldedOut = EditorGUILayout.Foldout(foldedOut, "");
-            FoldedOut[audioEvent.GetHashCode()] = foldedOut;
-
             //Show all the summary details and buttons
             EditorGUI.BeginChangeCheck();
-
-            //Playback controls
-            if (GUILayout.Button(new GUIContent("T", "Play this audio event"), GUILayout.MaxWidth(PlayButtonWidth)))
-            // if (GUILayout.Button(new GUIContent("T", "Play this audio event"), GUILayout.ExpandWidth(false)))
-            {
-                PlayAudio(audioEventIndex, true);
-            }
-
-            if (GUILayout.Button(new GUIContent("R", "Play random event in this group"), GUILayout.MaxWidth(PlayButtonWidth)))
-            {
-                PlayAudio(audioEventIndex, false);
-            }
 
             //Event name
             EditorGUIUtility.labelWidth = 20;
@@ -294,23 +269,47 @@ namespace UberAudio
             audioEvent.AudioClip = (AudioClip) EditorGUILayout.ObjectField("", audioEvent.AudioClip, typeof(AudioClip), false, GUILayout.MinWidth(60));
 
             //The random weight control
-            EditorGUIUtility.labelWidth = 20;
-            EditorGUIUtility.fieldWidth = 20;
-            audioEvent.RandomWeight = EditorGUILayout.FloatField("Wgt", audioEvent.RandomWeight, GUILayout.MaxWidth (60));
+            EditorGUIUtility.labelWidth = 25;
+            EditorGUIUtility.fieldWidth = 35;
+            audioEvent.RandomWeight = EditorGUILayout.FloatField(new GUIContent("Wgt", "Weight"), audioEvent.RandomWeight, GUILayout.MaxWidth(60));
 
             //Show the loop/lifetime mask
             DrawAudioEventOptionsMask(audioEvent);
 
-            //Delete an item?
-            if (GUILayout.Button("Dl", GUILayout.MaxWidth(25)))
+            //Details foldout
+            bool foldedOut = false;
+            if(FoldedOut.ContainsKey(audioEvent.GetHashCode()))
             {
-                IndexToDelete = audioEventIndex;
+                foldedOut = FoldedOut[audioEvent.GetHashCode()];
+            }
+            if (GUILayout.Button(new GUIContent("A", "Audio source settings"), GUILayout.MaxWidth(PlayButtonWidth)))
+            {
+                foldedOut = !foldedOut;
+            }
+            FoldedOut[audioEvent.GetHashCode()] = foldedOut;
+
+            //Playback controls
+            if (GUILayout.Button(new GUIContent("T", "Play this audio event"), GUILayout.MaxWidth(PlayButtonWidth)))
+            // if (GUILayout.Button(new GUIContent("T", "Play this audio event"), GUILayout.ExpandWidth(false)))
+            {
+                PlayAudio(audioEventIndex, true);
+            }
+
+            if (GUILayout.Button(new GUIContent("R", "Play random event in this group"), GUILayout.MaxWidth(PlayButtonWidth)))
+            {
+                PlayAudio(audioEventIndex, false);
             }
 
             //Clone an item?
-            if (GUILayout.Button("Cl", GUILayout.MaxWidth(FieldButtonWidth)))
+            if (GUILayout.Button(new GUIContent("C", "Clone this event"), GUILayout.MaxWidth(PlayButtonWidth)))
             {
                 IndexToClone = audioEventIndex;
+            }
+
+            //Delete an item?
+            if (GUILayout.Button(new GUIContent("X", "Delete this event"), GUILayout.MaxWidth(PlayButtonWidth)))
+            {
+                IndexToDelete = audioEventIndex;
             }
 
             // GUILayout.FlexibleSpace();
@@ -361,7 +360,7 @@ namespace UberAudio
 
             switch(currentEvent.type)
             {
-                case EventType.mouseDown:
+                case EventType.MouseDown:
                     if(dragArea!=null)
                     {
                         DragAndDrop.PrepareStartDrag();
@@ -374,7 +373,7 @@ namespace UberAudio
                     currentEvent.Use();
                     break;
                     
-                case EventType.mouseDrag:
+                case EventType.MouseDrag:
                     if(dragData!=null)
                     {
                         FoldedOut.Clear();
@@ -383,7 +382,7 @@ namespace UberAudio
                     DragAndDrop.visualMode = DragAndDropVisualMode.Move;
                     currentEvent.Use();
                     break;
-                case EventType.dragUpdated:
+                case EventType.DragUpdated:
                     if(dragData!=null && dragArea!=null)
                     {
                         if(dragArea.Index!=dragData.Index)
@@ -397,7 +396,7 @@ namespace UberAudio
                     }
                     currentEvent.Use();
                     break;
-                case EventType.repaint:
+                case EventType.Repaint:
                     if(dragData!=null && dragArea!=null)
                     {
                         if(DragAndDrop.visualMode==DragAndDropVisualMode.Move)
